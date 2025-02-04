@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: ORDER-SERVICE
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/order_db
+    username: product_usr
+    password: product_pwd
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  config:
+    import: configserver:http://localhost:9296
+   
+server:
+  port: 8082
+  servlet:
+    context-path: /order

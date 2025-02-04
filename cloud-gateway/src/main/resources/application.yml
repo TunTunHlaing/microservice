@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: CLOUD-GATEWAY
+  config:
+    import: configserver:http://localhost:9296
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true 
+          lower-case-service-id: true
+      routes:
+        - id: ORDER-SERVICE
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order/**
+
+        - id: PRODUCT-SERVICE
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product/**
+        - id: PAYMENT-SERVICE
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+          - Path=/payment/**
+server:
+  port: 9090
